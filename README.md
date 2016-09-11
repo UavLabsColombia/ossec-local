@@ -10,3 +10,10 @@ https://github.com/ossec/ossec-hids
 ```
 curl -k https://raw.githubusercontent.com/dorancemc/ossec-local/master/ossec_install.sh | sh -x
 ```
+
+### Para instalar el server web en CentOS/RHEL
+```
+yum install ossec-wui
+```
+
+

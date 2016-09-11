@@ -35,6 +35,9 @@ debian() {
 }
 
 redhat() {
+  if ! command_exists wget ; then
+    yum install wget -y
+  fi
   wget -q https://www.atomicorp.com/RPM-GPG-KEY.art.txt 1>/dev/null 2>&1
   wget -q https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt 1>/dev/null 2>&1
   rpm -import RPM-GPG-KEY.art.txt >/dev/null 2>&1

@@ -13,7 +13,7 @@ curl -k https://raw.githubusercontent.com/dorancemc/ossec-local/master/ossec_ins
 
 Para un ambiente de pruebas, puede instalar el server web en CentOS/RHEL, con el siguiente comando:
 ```
-yum install ossec-wui -y && sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config && setenforce 0 && firewall-cmd --zone=public --permanent --add-service=http && service httpd restart
+yum install ossec-wui -y && sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config && setenforce 0 && firewall-cmd --zone=public --permanent --add-service=http && service firewalld restart && service httpd restart
 ```
 En ambientes de producción, se recomienda realizar una instalación sobre una plataforma de analisis, en el siguiente enlace se explica una integración con kibana [ossec+kibana](http://vichargrave.com/create-an-ossec-log-management-console-with-kibana-4/)
 

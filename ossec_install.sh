@@ -31,7 +31,11 @@ debian() {
   apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
   apt-get update
   apt-cache search ossec
-  apt-get install ossec-hids -y
+  if [ "$install" == "server" ]; then
+    apt-get install ossec-hids -y
+  else
+    apt-get install ossec-hids-agent -y
+  fi
 }
 
 redhat() {
@@ -44,7 +48,11 @@ redhat() {
   rpm -import RPM-GPG-KEY.atomicorp.txt >/dev/null 2>&1
   wget -q http://updates.atomicorp.com/channels/atomic/centos/6/x86_64/RPMS/atomic-release-1.0-21.el6.art.noarch.rpm
   rpm -Uvh atomic-release-1.0-21.el6.art.noarch.rpm
-  yum install -y ossec-hids-server
+  if [ "$install" == "server" ]; then
+    yum install -y ossec-hids-server
+  else
+    yum install -y ossec-hids-client
+  fi  
 }
 
 unknown() {

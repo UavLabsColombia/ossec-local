@@ -11,11 +11,10 @@ https://github.com/ossec/ossec-hids
 curl -k https://raw.githubusercontent.com/dorancemc/ossec-local/master/ossec_install.sh | sh -x
 ```
 
-Para instalar el server web en CentOS/RHEL.  
-Este ambiente gráfico es sólo para temas demostrativos.   
-En producción, Se recomienda realizar una instalación sobre una plataforma de analisis, en el siguiente enlace se explica una integración con kibana [ossec+kibana](http://vichargrave.com/create-an-ossec-log-management-console-with-kibana-4/)
+Para un ambiente de pruebas, puede instalar el server web en CentOS/RHEL, con el siguiente comando:
 ```
-yum install ossec-wui && cd /usr/share/ossec-wui/ && ./setup.sh && chmod 770 tmp/ && chgrp apache tmp/ && sed -i "s/AllowOverride AuthConfig/AllowOverride AuthConfig Limit/g" /etc/httpd/conf.d/ossec.conf && service httpd restart
+yum install ossec-wui -y && sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config && setenforce 0 && firewall-cmd --zone=public --permanent --add-service=http && service httpd restart
 ```
+En ambientes de producción, se recomienda realizar una instalación sobre una plataforma de analisis, en el siguiente enlace se explica una integración con kibana [ossec+kibana](http://vichargrave.com/create-an-ossec-log-management-console-with-kibana-4/)
 
 

@@ -7,6 +7,14 @@ https://github.com/ossec/ossec-hids
 
 ### Rápida instalación 
 
+#### Server
+
+```
+export install="server" ; curl -k https://raw.githubusercontent.com/dorancemc/ossec-local/master/ossec_install.sh | sh -x
+```
+
+#### Agent
+
 ```
 curl -k https://raw.githubusercontent.com/dorancemc/ossec-local/master/ossec_install.sh | sh -x
 ```

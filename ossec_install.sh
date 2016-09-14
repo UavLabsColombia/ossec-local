@@ -31,7 +31,7 @@ debian() {
   apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
   apt-get update
   apt-cache search ossec
-  if [ "$install" == "server" ]; then
+  if [ "$install" = "server" ]; then
     apt-get install ossec-hids -y
   else
     apt-get install ossec-hids-agent -y

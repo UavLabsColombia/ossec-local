@@ -34,8 +34,13 @@ debian() {
   apt-get update &&
   apt-cache search ossec &&
   if [ "$install" = "server" ]; then
+    echo ossec-hids	ossec-hids/email_notification	select	yes | debconf-set-selections &&
+    echo ossec-hids	ossec-hids/email_from	string	ossecm@localhost | debconf-set-selections &&
+    echo ossec-hids	ossec-hids/smtp_server	string	localhost | debconf-set-selections &&
+    echo ossec-hids	ossec-hids/email_to	string	root@localhost | debconf-set-selections &&
     apt-get install ossec-hids -y
   else
+    echo ossec-hids-agent	ossec-hids-agent/server-ip	string	127.0.0.1 | debconf-set-selections &&
     apt-get install ossec-hids-agent -y
   fi
 }
@@ -46,8 +51,8 @@ redhat() {
   fi
   wget -q https://www.atomicorp.com/RPM-GPG-KEY.art.txt 1>/dev/null 2>&1 &&
   wget -q https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt 1>/dev/null 2>&1 &&
-  rpm -import RPM-GPG-KEY.art.txt >/dev/null 2>&1 &&
-  rpm -import RPM-GPG-KEY.atomicorp.txt >/dev/null 2>&1 &&
+  rpm -import RPM-GPG-KEY.art.txt >/dev/null 2>&1 
+  rpm -import RPM-GPG-KEY.atomicorp.txt >/dev/null 2>&1 
   wget -q http://updates.atomicorp.com/channels/atomic/centos/6/x86_64/RPMS/atomic-release-1.0-21.el6.art.noarch.rpm &&
   rpm -Uvh atomic-release-1.0-21.el6.art.noarch.rpm &&
   if [ "$install" == "server" ]; then
